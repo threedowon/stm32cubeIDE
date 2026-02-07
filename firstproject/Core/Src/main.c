@@ -86,26 +86,36 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+//
+//  volatile unsigned int * reg = 0x40021018;
+//  *reg |= 16;
+//  GPIO_InitTypeDef GPIO_InitStruct = {0};
+//  GPIO_InitStruct.Pin = GPIO_LED_Pin;
+//  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+//  GPIO_InitStruct.Pull = GPIO_PULLUP;
+//  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+//  HAL_GPIO_Init(GPIO_LED_GPIO_Port, &GPIO_InitStruct);
+
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  volatile unsigned int * reg2 = 0x40011010;
   while (1)
   {
-//	  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, 1);
-//	  HAL_Delay(100);
-//	  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, 0);
-//	  HAL_Delay(100);
+//	*reg2 = 0x2000;
 
-	  if(!HAL_GPIO_ReadPin(GPIO_SW_GPIO_Port, GPIO_SW_Pin)){
-		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, 0);
-	  }
-	  else{
-		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, 1);
-	  }
-	  HAL_Delay(100);
+//	HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, 0x2000, 0);
+//	HAL_Delay(100);
+//	HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, 0x2000, 1);
+//	HAL_Delay(100);
+	*reg2 = 0x2000;
+	HAL_Delay(100);
+	*reg2 = (0x2000 << 16);
+	HAL_Delay(100);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
